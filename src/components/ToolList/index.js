@@ -1,11 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import ToolItem from 'components/ToolItem';
 import { MdAdd } from 'react-icons/md';
 
-import { Container, SearchContainer } from './styles';
+import api from 'services/api';
+
+import { Container, SearchContainer, ToolsContainer } from './styles';
 
 export default function ToolList() {
+  const [tools, setTools] = useState([]);
+
+  useEffect(() => {
+    async function searchTools() {
+      const { data } = await api.get('/tools');
+
+      setTools(data);
+      console.log(data);
+    }
+
+    searchTools();
+  }, []);
+
   return (
     <Container>
       <SearchContainer>
@@ -22,7 +37,12 @@ export default function ToolList() {
           <MdAdd /> Add
         </button>
       </SearchContainer>
-      <ToolItem />
+
+      <ToolsContainer>
+        {tools.map(tool => (
+          <ToolItem key={tool.id} tool={tool} />
+        ))}
+      </ToolsContainer>
     </Container>
   );
 }

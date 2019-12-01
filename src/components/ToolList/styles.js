@@ -13,6 +13,7 @@ export const SearchContainer = styled.div`
   .search {
     padding: 0 20px 0 35px;
     background: url(${searchIcon}) no-repeat center left 7px;
+    background-color: #fff;
     background-size: 15px;
     width: 150px;
     height: 30px;
@@ -39,11 +40,12 @@ export const SearchContainer = styled.div`
     background: #170c3a;
     color: #fff;
     border: none;
-    box-shadow: 2px 2px 2px #bbb;
     border-radius: 5px;
 
     &:hover {
-      background: ${darken(0.03, '#170c3a')};
+      background: ${darken(0.05, '#170c3a')};
     }
   }
 `;
+
+export const ToolsContainer = styled.div``;
