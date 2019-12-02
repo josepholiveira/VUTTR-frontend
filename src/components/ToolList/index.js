@@ -1,7 +1,8 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 
 import ToolItem from 'components/ToolItem';
-import { MdAdd } from 'react-icons/md';
+import { MdAdd, MdCheck } from 'react-icons/md';
 
 import api from 'services/api';
 
@@ -15,7 +16,6 @@ export default function ToolList() {
       const { data } = await api.get('/tools');
 
       setTools(data);
-      console.log(data);
     }
 
     searchTools();
@@ -25,12 +25,17 @@ export default function ToolList() {
     <Container>
       <SearchContainer>
         <div>
-          <input type="text" className="search" />
+          <input type="text" className="search" placeholder="search" />
 
-          <label htmlFor="tag">
+          <div>
             <input id="tag" type="checkbox" />
-            search in tags only
-          </label>
+            <label htmlFor="tag">
+              <div className="box">
+                <MdCheck color="#2F55CC" />
+              </div>
+              search in tags only
+            </label>
+          </div>
         </div>
 
         <button type="button">

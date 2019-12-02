@@ -10,12 +10,12 @@ export const Container = styled.header`
 
 export const LogoText = styled.h1`
   font-size: 42px;
-  color: #170c3a;
+  color: #2f55cc;
   letter-spacing: 0.84px;
 `;
 
 export const DescriptionText = styled.h3`
   font-size: 30px;
-  color: #170c3a;
+  color: #9aaef7;
   letter-spacing: 0.6px;
 `;
