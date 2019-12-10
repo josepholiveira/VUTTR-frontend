@@ -13,11 +13,11 @@ export default function tools(state = [], action) {
         const { tool } = action;
 
         draft.push(tool);
-        console.tron.log(draft);
+
         return draft;
       });
 
-    case '@tools/REMOVE':
+    case '@tools/REMOVE_SUCCESS':
       return produce(state, draft => {
         const toolIndex = draft.findIndex(t => t.id === action.id);
 

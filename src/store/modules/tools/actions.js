@@ -27,6 +27,10 @@ export function addToolSuccess(tool) {
   };
 }
 
-export function removeTool(id) {
-  return { type: '@tools/REMOVE', id };
+export function removeToolRequest(id) {
+  return { type: '@tools/REMOVE_REQUEST', id };
+}
+
+export function removeToolSuccess(id) {
+  return { type: '@tools/REMOVE_SUCCESS', id };
 }

@@ -2,7 +2,11 @@ import { call, put, all, takeLatest } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 import api from '../../../services/api';
 
-import { addToolSuccess, searchToolsSuccess } from './actions';
+import {
+  addToolSuccess,
+  removeToolSuccess,
+  searchToolsSuccess,
+} from './actions';
 
 function* searchTools({ searchParams }) {
   let data = [];
@@ -28,7 +32,16 @@ function* addTool({ tool }) {
   toast.success('Ferramenta adicionada com sucesso! :)');
 }
 
+function* removeTool({ id }) {
+  yield call(api.delete, `/tools/${id}`);
+
+  yield put(removeToolSuccess(id));
+
+  toast.success('Ferramenta removida com sucesso! :)');
+}
+
 export default all([
   takeLatest('@tools/SEARCH_REQUEST', searchTools),
   takeLatest('@tools/ADD_REQUEST', addTool),
+  takeLatest('@tools/REMOVE_REQUEST', removeTool),
 ]);
