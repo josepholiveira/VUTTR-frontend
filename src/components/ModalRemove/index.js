@@ -47,6 +47,7 @@ export default function ModalRemove({ isOpen, tool }) {
 
 ModalRemove.propTypes = {
   tool: PropTypes.shape({
+    id: PropTypes.number,
     title: PropTypes.string,
     link: PropTypes.string,
     description: PropTypes.string,
