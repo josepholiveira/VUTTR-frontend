@@ -1,34 +1,56 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 
+import { useDispatch, useSelector } from 'react-redux';
+
+import ModalAdd from 'components/ModalAdd';
+
 import ToolItem from 'components/ToolItem';
 import { MdAdd, MdCheck } from 'react-icons/md';
 
-import api from 'services/api';
-
 import { Container, SearchContainer, ToolsContainer } from './styles';
 
+import * as ToolActions from '../../store/modules/tools/actions';
+
 export default function ToolList() {
-  const [tools, setTools] = useState([]);
+  const dispatch = useDispatch();
+  const [searchValue, setSearchValue] = useState('');
+  const [modalStatus, setModalStatus] = useState(false);
+  const [searchOnlyTags, setSearchOnlyTags] = useState('');
+  const tools = useSelector(state => state.tools);
 
   useEffect(() => {
-    async function searchTools() {
-      const { data } = await api.get('/tools');
+    dispatch(ToolActions.searchToolsRequest());
+  }, [dispatch]);
 
-      setTools(data);
-    }
+  function searchToolsSubmit(e) {
+    e.preventDefault();
+    const searchParams = { searchOnlyTags, searchValue };
 
-    searchTools();
-  }, []);
+    dispatch(ToolActions.searchToolsRequest(searchParams));
+  }
+
+  function toggleModalAdd() {
+    setModalStatus(!modalStatus);
+  }
 
   return (
     <Container>
       <SearchContainer>
-        <div>
-          <input type="text" className="search" placeholder="search" />
+        <form onSubmit={searchToolsSubmit}>
+          <input
+            type="text"
+            className="search"
+            placeholder="search"
+            onChange={event => setSearchValue(event.target.value)}
+          />
 
           <div>
-            <input id="tag" type="checkbox" />
+            <input
+              id="tag"
+              type="checkbox"
+              onChange={event => setSearchOnlyTags(event.target.checked)}
+            />
             <label htmlFor="tag">
               <div className="box">
                 <MdCheck color="#2F55CC" />
@@ -36,9 +58,9 @@ export default function ToolList() {
               search in tags only
             </label>
           </div>
-        </div>
+        </form>
 
-        <button type="button">
+        <button type="button" onClick={() => toggleModalAdd()}>
           <MdAdd /> Add
         </button>
       </SearchContainer>
@@ -48,6 +70,8 @@ export default function ToolList() {
           <ToolItem key={tool.id} tool={tool} />
         ))}
       </ToolsContainer>
+
+      <ModalAdd isOpen={modalStatus} />
     </Container>
   );
 }

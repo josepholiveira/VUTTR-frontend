@@ -21,7 +21,7 @@ export const SearchContainer = styled.div`
     box-shadow: 0px 15px 20px #00000012;
   }
 
-  div {
+  form {
     display: flex;
     flex-direction: row;
     align-items: center;
