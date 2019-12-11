@@ -12,7 +12,7 @@ function* searchTools({ searchParams }) {
   let data = [];
 
   if (searchParams.searchOnlyTags && searchParams.searchValue) {
-    data = yield call(api.get, `/tools?q=${searchParams.searchValue}`);
+    data = yield call(api.get, `/tools?tags_like=${searchParams.searchValue}`);
   } else if (searchParams.searchValue) {
     data = yield call(api.get, `/tools?q=${searchParams.searchValue}`);
   } else {
