@@ -20,8 +20,6 @@ function* searchTools({ searchParams }) {
   }
 
   yield put(searchToolsSuccess(data));
-
-  toast.success('Ferramenta adicionada com sucesso! :)');
 }
 
 function* addTool({ tool }) {
