@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import PropTypes from 'prop-types';
+
 import { MdClose } from 'react-icons/md';
 
 import { useDispatch } from 'react-redux';
@@ -9,7 +11,7 @@ import { Container, Title } from './styles';
 import * as ToolActions from '../../store/modules/tools/actions';
 import Modal from '../Modal';
 
-export default function ModalAdd({ isOpen, tool }) {
+export default function ModalRemove({ isOpen, tool }) {
   const dispatch = useDispatch();
   const [modalStatus, setModalStatus] = useState(isOpen);
 
@@ -42,3 +44,13 @@ export default function ModalAdd({ isOpen, tool }) {
     </Modal>
   );
 }
+
+ModalRemove.propTypes = {
+  tool: PropTypes.shape({
+    title: PropTypes.string,
+    link: PropTypes.string,
+    description: PropTypes.string,
+    tags: PropTypes.arrayOf(PropTypes.string),
+  }).isRequired,
+  isOpen: PropTypes.bool.isRequired,
+};

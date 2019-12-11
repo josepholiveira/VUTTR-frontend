@@ -28,8 +28,12 @@ export const Container = styled.div`
   p {
     margin-bottom: 15px;
   }
+`;
 
-  b + b {
-    margin: 0 5px;
-  }
+export const Tag = styled.b`
+  margin: 0 5px 0px;
+  background: ${props =>
+    props.tag === props.search && props.onlyTags === true
+      ? '#FFBB43'
+      : 'transparent'};
 `;

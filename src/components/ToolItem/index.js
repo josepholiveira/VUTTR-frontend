@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import { MdClose } from 'react-icons/md';
-import { Container } from './styles';
+import { Container, Tag } from './styles';
 
 import ModalRemove from '../ModalRemove';
 
-export default function ToolItem({ tool }) {
+export default function ToolItem({ tool, search, onlyTags }) {
   const [modalStatus, setModalStatus] = useState(false);
 
   function toggleModalRemove() {
@@ -26,7 +27,9 @@ export default function ToolItem({ tool }) {
         <p>{tool.description}</p>
 
         {tool.tags.map(tag => (
-          <b key={tag}>#{tag}</b>
+          <Tag key={tag} tag={tag} search={search} onlyTags={onlyTags}>
+            #{tag}
+          </Tag>
         ))}
 
         <ModalRemove isOpen={modalStatus} tool={tool} />
@@ -34,3 +37,18 @@ export default function ToolItem({ tool }) {
     </>
   );
 }
+
+ToolItem.defaultProps = {
+  search: '',
+};
+
+ToolItem.propTypes = {
+  tool: PropTypes.shape({
+    title: PropTypes.string,
+    link: PropTypes.string,
+    description: PropTypes.string,
+    tags: PropTypes.arrayOf(PropTypes.string),
+  }).isRequired,
+  search: PropTypes.string,
+  onlyTags: PropTypes.bool.isRequired,
+};

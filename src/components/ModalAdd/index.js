@@ -3,6 +3,8 @@ import * as Yup from 'yup';
 
 import { MdAdd } from 'react-icons/md';
 
+import PropTypes from 'prop-types';
+
 import { useDispatch } from 'react-redux';
 
 import { Title, MyForm, MyInput, MyTextarea, Button } from './styles';
@@ -55,3 +57,7 @@ export default function ModalAdd({ isOpen }) {
     </Modal>
   );
 }
+
+ModalAdd.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+};

@@ -67,7 +67,12 @@ export default function ToolList() {
 
       <ToolsContainer>
         {tools.map(tool => (
-          <ToolItem key={tool.id} tool={tool} />
+          <ToolItem
+            key={tool.id}
+            tool={tool}
+            search={searchValue}
+            onlyTags={searchOnlyTags}
+          />
         ))}
       </ToolsContainer>
 
